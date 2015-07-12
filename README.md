@@ -1,5 +1,6 @@
 # H5lock
-
+##Demo
+<img src="http://lvming6816077.github.io/H5FullscreenPage/H5lockdemo/1436713975.png" />
 ##How to use?
 
 <pre><code>
@@ -8,7 +9,6 @@ var opt = {
   width: 300, // lock wrap width
   height: 300 // lock wrap width
 }
-
 new H5lock(opt).init();
 </code>
 <pre>
