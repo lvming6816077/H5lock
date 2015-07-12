@@ -1,5 +1,5 @@
 (function(){
-        var H5lock = function(obj){
+        window.H5lock = function(obj){
             this.height = obj.height;
             this.width = obj.width;
             this.chooseType = Number(window.localStorage.getItem('chooseType')) || obj.chooseType;
@@ -164,7 +164,7 @@
         H5lock.prototype.initDom = function(){
             var wrap = document.createElement('div');
             var str = '<h4 id="title" class="title">绘制解锁图案</h4>'+
-                      '<a id="updatePassword" style="position: absolute;right: 5px;top: 5px;color:#fff;font-size: 10px;">重置密码</a>'+
+                      '<a id="updatePassword" style="position: absolute;right: 5px;top: 5px;color:#fff;font-size: 10px;display:none;">重置密码</a>'+
                       '<canvas id="canvas" width="300" height="300" style="background-color: #305066;display: inline-block;margin-top: 15px;"></canvas>';
             wrap.setAttribute('style','position: absolute;top:0;left:0;right:0;bottom:0;');
             wrap.innerHTML = str;
@@ -224,10 +224,8 @@
              document.addEventListener('touchmove', function(e){
                 e.preventDefault();
              },false);
+             document.getElementById('updatePassword').addEventListener('click', function(){
+                 self.updatePassword();
+              });
         }
-
-        // 初始化调用
-        new H5lock({
-            chooseType: 3
-        }).init();
 })();
