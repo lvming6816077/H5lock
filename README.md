@@ -2,7 +2,7 @@
 
 ##How to use?
 
-<code>
+<pre><code>
 var opt = {
   chooseType: 3, // 3 , 4 , 5,
   width: 300, // lock wrap width
@@ -11,3 +11,4 @@ var opt = {
 
 new H5lock(opt).init();
 </code>
+<pre>
