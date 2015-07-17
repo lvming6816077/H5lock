@@ -115,7 +115,7 @@
                     this.pswObj.spassword = psw;
                     document.getElementById('title').innerHTML = '密码保存成功';
                     this.drawStatusPoint('#2CFF26');
-                    window.localStorage.setItem('password', this.pswObj.spassword);
+                    window.localStorage.setItem('password', JSON.stringify(this.pswObj.spassword));
                     window.localStorage.setItem('chooseType', this.chooseType);
                 } else {
                     document.getElementById('title').innerHTML = '两次不一致，重新输入';
@@ -174,7 +174,7 @@
             this.initDom();
             this.pswObj = window.localStorage.getItem('password') ? {
                 step: 2,
-                spassword: window.localStorage.getItem('password')
+                spassword: JSON.parse(window.localStorage.getItem('password'))
             } : {};
             this.lastPoint = [];
             this.makeState();
