@@ -191,6 +191,7 @@
         H5lock.prototype.bindEvent = function() {
             var self = this;
             this.canvas.addEventListener("touchstart", function (e) {
+                e.preventDefault();// 某些android 的 touchmove不宜触发 所以增加此行代码
                  var po = self.getPosition(e);
                  console.log(po);
                  for (var i = 0 ; i < self.arr.length ; i++) {
