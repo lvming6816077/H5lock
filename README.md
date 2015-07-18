@@ -7,7 +7,7 @@
 var opt = {
   chooseType: 3, // 3 , 4 , 5,
   width: 300, // lock wrap width
-  height: 300 // lock wrap width
+  height: 300 // lock wrap height
 }
 new H5lock(opt).init();
 </code>
