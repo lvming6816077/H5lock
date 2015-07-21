@@ -48,6 +48,7 @@
         H5lock.prototype.createCircle = function() {// 创建解锁点的坐标，根据canvas的大小来平均分配半径
 
             var n = this.chooseType;
+            var count = 0;
             this.r = this.ctx.canvas.width / (2 + 4 * n);// 公式计算
             this.lastPoint = [];
             this.arr = [];
@@ -55,9 +56,11 @@
             var r = this.r;
             for (var i = 0 ; i < n ; i++) {
                 for (var j = 0 ; j < n ; j++) {
+                    count++;
                     var obj = {
                         x: j * 4 * r + 3 * r,
-                        y: i * 4 * r + 3 * r
+                        y: i * 4 * r + 3 * r,
+                        index: count
                     };
                     this.arr.push(obj);
                     this.restPoint.push(obj);
@@ -101,10 +104,10 @@
             var p1 = '',
             p2 = '';
             for (var i = 0 ; i < psw1.length ; i++) {
-                p1 += psw1[i].x + psw1[i].y;
+                p1 += psw1[i].index + psw1[i].index;
             }
             for (var i = 0 ; i < psw2.length ; i++) {
-                p2 += psw2[i].x + psw2[i].y;
+                p2 += psw2[i].index + psw2[i].index;
             }
             return p1 === p2;
         }
@@ -115,7 +118,7 @@
                     this.pswObj.spassword = psw;
                     document.getElementById('title').innerHTML = '密码保存成功';
                     this.drawStatusPoint('#2CFF26');
-                    window.localStorage.setItem('password', JSON.stringify(this.pswObj.spassword));
+                    window.localStorage.setItem('passwordxx', JSON.stringify(this.pswObj.spassword));
                     window.localStorage.setItem('chooseType', this.chooseType);
                 } else {
                     document.getElementById('title').innerHTML = '两次不一致，重新输入';
@@ -155,7 +158,7 @@
             init();
         }
         H5lock.prototype.updatePassword = function(){
-            window.localStorage.removeItem('password');
+            window.localStorage.removeItem('passwordxx');
             window.localStorage.removeItem('chooseType');
             this.pswObj = {};
             document.getElementById('title').innerHTML = '绘制解锁图案';
@@ -172,9 +175,9 @@
         }
         H5lock.prototype.init = function() {
             this.initDom();
-            this.pswObj = window.localStorage.getItem('password') ? {
+            this.pswObj = window.localStorage.getItem('passwordxx') ? {
                 step: 2,
-                spassword: JSON.parse(window.localStorage.getItem('password'))
+                spassword: JSON.parse(window.localStorage.getItem('passwordxx'))
             } : {};
             this.lastPoint = [];
             this.makeState();
