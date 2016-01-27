@@ -16,6 +16,8 @@ var lock = new H5lock(opt);
 lock.init();
 </code>
 <pre>
+
+
 ##Option method
 <pre><code>
 lock.drawStatusPoint('notright') // draw the last notright circle
