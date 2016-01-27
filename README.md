@@ -15,8 +15,7 @@ var opt = {
 var lock = new H5lock(opt);
 lock.init();
 </code>
-<pre>
-
+</pre>
 
 ##Option method
 <pre><code>
@@ -26,4 +25,4 @@ lock.drawStatusPoint('right') // draw the last right circle
 
 lock.reset() // reset the lock
 </code>
-<pre>
+</pre>
