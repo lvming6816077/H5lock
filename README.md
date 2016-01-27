@@ -4,7 +4,7 @@
 ##How to use?
 
 <pre><code>
-<script type="text/javascript" src="src/H5lock.publish.js"></script>
+&ltscript type="text/javascript" src="src/H5lock.publish.js"></script>
 var opt = {
   chooseType: 3, // 3 , 4 , 5,
   width: 300, // lock wrap width
