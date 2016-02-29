@@ -5,6 +5,34 @@
             this.chooseType = Number(window.localStorage.getItem('chooseType')) || obj.chooseType;
         };
 
+        function getDis(a, b) {
+            return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+        };
+
+        H5lock.prototype.pickPoints = function(fromPt, toPt) {
+            var lineLength = getDis(fromPt, toPt);
+            var dir = toPt.index > fromPt.index ? 1 : -1;
+
+            var len = this.restPoint.length;
+            var i = dir === 1 ? 0 : (len - 1);
+            var limit = dir === 1 ? len : -1;
+
+            while (i !== limit) {
+                var pt = this.restPoint[i];
+
+                if (getDis(pt, fromPt) + getDis(pt, toPt) === lineLength) {
+                    this.drawPoint(pt.x, pt.y);
+                    this.lastPoint.push(pt);
+                    this.restPoint.splice(i, 1);
+                    if (limit > 0) {
+                        i--;
+                        limit--;
+                    }
+                }
+
+                i+=dir;
+            }
+        }
 
         H5lock.prototype.drawCle = function(x, y) { // 初始化解锁密码面板
             this.ctx.strokeStyle = '#CFE6FF';
@@ -24,7 +52,7 @@
             }
         }
         H5lock.prototype.drawStatusPoint = function(type) { // 初始化状态线条
-            
+
             for (var i = 0 ; i < this.lastPoint.length ; i++) {
                 this.ctx.strokeStyle = type;
                 this.ctx.beginPath();
@@ -92,10 +120,11 @@
             this.drawLine(po , this.lastPoint);// 每帧画圆心
 
             for (var i = 0 ; i < this.restPoint.length ; i++) {
-                if (Math.abs(po.x - this.restPoint[i].x) < this.r && Math.abs(po.y - this.restPoint[i].y) < this.r) {
-                    this.drawPoint(this.restPoint[i].x, this.restPoint[i].y);
-                    this.lastPoint.push(this.restPoint[i]);
-                    this.restPoint.splice(i, 1);
+                var pt = this.restPoint[i];
+
+                if (Math.abs(po.x - pt.x) < this.r && Math.abs(po.y - pt.y) < this.r) {
+                    this.drawPoint(pt.x, pt.y);
+                    this.pickPoints(this.lastPoint[this.lastPoint.length - 1], pt);
                     break;
                 }
             }
