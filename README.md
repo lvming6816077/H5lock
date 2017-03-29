@@ -1,10 +1,10 @@
 # H5lock
 
-##Demo
+## Demo
 
 <img src="http://lvming6816077.github.io/H5FullscreenPage/H5lockdemo/1436713975.png" />
 
-##How to use?
+## How to use?
 
 ```
 <script type="text/javascript" src="src/H5lock.publish.js"></script>
@@ -19,7 +19,7 @@ var lock = new H5lock(opt);
 lock.init();
 ```
 
-##Option method
+## Option method
 
 ```
 lock.drawStatusPoint('notright') // draw the last notright circle
