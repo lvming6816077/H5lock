@@ -5,6 +5,7 @@
             this.chooseType = obj.chooseType;
             this.container = obj.container;
             this.inputEnd = obj.inputEnd;
+            this.devicePixelRatio = window.devicePixelRatio || 1;
         };
 
 
@@ -84,8 +85,8 @@
         H5lock.prototype.getPosition = function(e) {// 获取touch点相对于canvas的坐标
             var rect = e.currentTarget.getBoundingClientRect();
             var po = {
-                x: e.touches[0].clientX - rect.left,
-                y: e.touches[0].clientY - rect.top
+                x: (e.touches[0].clientX - rect.left)*this.devicePixelRatio,
+                y: (e.touches[0].clientY - rect.top)*this.devicePixelRatio
               };
             return po;
         }
@@ -134,10 +135,27 @@
         }
         H5lock.prototype.initDom = function(){
             var wrap = document.getElementById(this.container);
-            var str = '<canvas id="canvas" width="300" height="300" style="background-color: #305066;display: inline-block;margin-top: 15px;"></canvas>';
-            // wrap.setAttribute('style','position: absolute;top:0;left:0;right:0;bottom:0;');
-            wrap.innerHTML = str;
-            // document.body.appendChild(wrap);
+            if(wrap) {
+                var canvas = document.createElement('canvas');
+                canvas.setAttribute('id','canvas');
+                canvas.style.cssText = 'background-color: #305066;display: inline-block;margin-top: 15px;';
+
+                wrap.appendChild(canvas);
+
+                var width = this.width || 300;
+                var height = this.height || 300;
+                
+                document.body.appendChild(wrap);
+
+                // 高清屏锁放
+                canvas.style.width = width + "px";
+                canvas.style.height = height + "px";
+                canvas.height = height * this.devicePixelRatio;
+                canvas.width = width * this.devicePixelRatio;
+            }
+
+
+            
         }
         H5lock.prototype.init = function() {
             this.initDom();

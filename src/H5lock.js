@@ -1,38 +1,16 @@
+/*
+* demo展示所用 正常使用请用H5lock.publish.js
+*
+*/
+
 (function(){
         window.H5lock = function(obj){
             this.height = obj.height;
             this.width = obj.width;
             this.chooseType = Number(window.localStorage.getItem('chooseType')) || obj.chooseType;
+            this.devicePixelRatio = window.devicePixelRatio || 1;
         };
 
-        function getDis(a, b) {
-            return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
-        };
-
-        H5lock.prototype.pickPoints = function(fromPt, toPt) {
-            var lineLength = getDis(fromPt, toPt);
-            var dir = toPt.index > fromPt.index ? 1 : -1;
-
-            var len = this.restPoint.length;
-            var i = dir === 1 ? 0 : (len - 1);
-            var limit = dir === 1 ? len : -1;
-
-            while (i !== limit) {
-                var pt = this.restPoint[i];
-
-                if (getDis(pt, fromPt) + getDis(pt, toPt) === lineLength) {
-                    this.drawPoint(pt.x, pt.y);
-                    this.lastPoint.push(pt);
-                    this.restPoint.splice(i, 1);
-                    if (limit > 0) {
-                        i--;
-                        limit--;
-                    }
-                }
-
-                i+=dir;
-            }
-        }
 
         H5lock.prototype.drawCle = function(x, y) { // 初始化解锁密码面板
             this.ctx.strokeStyle = '#CFE6FF';
@@ -52,7 +30,6 @@
             }
         }
         H5lock.prototype.drawStatusPoint = function(type) { // 初始化状态线条
-
             for (var i = 0 ; i < this.lastPoint.length ; i++) {
                 this.ctx.strokeStyle = type;
                 this.ctx.beginPath();
@@ -104,8 +81,8 @@
         H5lock.prototype.getPosition = function(e) {// 获取touch点相对于canvas的坐标
             var rect = e.currentTarget.getBoundingClientRect();
             var po = {
-                x: e.touches[0].clientX - rect.left,
-                y: e.touches[0].clientY - rect.top
+                x: (e.touches[0].clientX - rect.left)*this.devicePixelRatio,
+                y: (e.touches[0].clientY - rect.top)*this.devicePixelRatio
               };
             return po;
         }
@@ -120,11 +97,10 @@
             this.drawLine(po , this.lastPoint);// 每帧画圆心
 
             for (var i = 0 ; i < this.restPoint.length ; i++) {
-                var pt = this.restPoint[i];
-
-                if (Math.abs(po.x - pt.x) < this.r && Math.abs(po.y - pt.y) < this.r) {
-                    this.drawPoint(pt.x, pt.y);
-                    this.pickPoints(this.lastPoint[this.lastPoint.length - 1], pt);
+                if (Math.abs(po.x - this.restPoint[i].x) < this.r && Math.abs(po.y - this.restPoint[i].y) < this.r) {
+                    this.drawPoint(this.restPoint[i].x, this.restPoint[i].y);
+                    this.lastPoint.push(this.restPoint[i]);
+                    this.restPoint.splice(i, 1);
                     break;
                 }
             }
@@ -197,11 +173,26 @@
         H5lock.prototype.initDom = function(){
             var wrap = document.createElement('div');
             var str = '<h4 id="title" class="title">绘制解锁图案</h4>'+
-                      '<a id="updatePassword" style="position: absolute;right: 5px;top: 5px;color:#fff;font-size: 10px;display:none;">重置密码</a>'+
-                      '<canvas id="canvas" width="300" height="300" style="background-color: #305066;display: inline-block;margin-top: 15px;"></canvas>';
+                      '<a id="updatePassword" style="position: absolute;right: 5px;top: 5px;color:#fff;font-size: 10px;display:none;">重置密码</a>';
+
             wrap.setAttribute('style','position: absolute;top:0;left:0;right:0;bottom:0;');
+            var canvas = document.createElement('canvas');
+            canvas.setAttribute('id','canvas');
+            canvas.style.cssText = 'background-color: #305066;display: inline-block;margin-top: 15px;';
             wrap.innerHTML = str;
+            wrap.appendChild(canvas);
+
+            var width = this.width || 300;
+            var height = this.height || 300;
+            
             document.body.appendChild(wrap);
+
+            // 高清屏锁放
+            canvas.style.width = width + "px";
+            canvas.style.height = height + "px";
+            canvas.height = height * this.devicePixelRatio;
+            canvas.width = width * this.devicePixelRatio;
+
         }
         H5lock.prototype.init = function() {
             this.initDom();
@@ -255,9 +246,7 @@
 
 
              }, false);
-             document.addEventListener('touchmove', function(e){
-                e.preventDefault();
-             },false);
+
              document.getElementById('updatePassword').addEventListener('click', function(){
                  self.updatePassword();
               });
