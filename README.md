@@ -3,7 +3,7 @@
 ## Demo
 
 <img src="http://lvming6816077.github.io/H5FullscreenPage/H5lockdemo/1436713975.png" />
-
+<img src="https://oc5n93kni.qnssl.com/QQ%E5%9B%BE%E7%89%8720170329192349.png" />
 ## How to use?
 
 ```
