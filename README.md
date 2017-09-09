@@ -37,7 +37,7 @@ lock.reset() // reset the lock
 ## Support Vue
 
 ```
-> Address(https://github.com/guntertien/vue-lock)
+> Address[vue-lock](https://github.com/guntertien/vue-lock)
 
 ```
 
