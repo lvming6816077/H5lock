@@ -34,3 +34,10 @@ lock.drawStatusPoint('right') // draw the last right circle
 
 lock.reset() // reset the lock
 ```
+## Support Vue
+
+```
+> Address(https://github.com/guntertien/vue-lock)
+
+```
+
