@@ -3,7 +3,13 @@
 ## Demo
 
 <img src="http://lvming6816077.github.io/H5FullscreenPage/H5lockdemo/1436713975.png" />
-<img src="https://oc5n93kni.qnssl.com/QQ%E5%9B%BE%E7%89%8720170329192349.png" />
+
+## Demo
+
+<img width="375" height="667" src="https://raw.githubusercontent.com/guntertien/H5lock/master/image/p1.jpeg" />
+<img width="375" height="667" src="https://raw.githubusercontent.com/guntertien/H5lock/master/image/p2.jpeg" />
+<img width="375" height="667" src="https://raw.githubusercontent.com/guntertien/H5lock/master/image/p3.jpeg" />
+
 ## How to use?
 
 ```
@@ -28,3 +34,10 @@ lock.drawStatusPoint('right') // draw the last right circle
 
 lock.reset() // reset the lock
 ```
+## Support Vue
+
+```
+> Address[vue-lock](https://github.com/guntertien/vue-lock)
+
+```
+
