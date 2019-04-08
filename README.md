@@ -1,8 +1,6 @@
 # H5lock
 
-## Demo
 
-<img src="http://lvming6816077.github.io/H5FullscreenPage/H5lockdemo/1436713975.png" />
 
 ## Demo
 
