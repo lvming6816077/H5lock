@@ -4,9 +4,7 @@
 
 ## Demo
 
-<img width="375" height="667" src="https://raw.githubusercontent.com/guntertien/H5lock/master/image/p1.jpeg" />
-<img width="375" height="667" src="https://raw.githubusercontent.com/guntertien/H5lock/master/image/p2.jpeg" />
-<img width="375" height="667" src="https://raw.githubusercontent.com/guntertien/H5lock/master/image/p3.jpeg" />
+<img width="375" height="667" src="http://ww1.sinaimg.cn/large/808a542aly1gewe104wrcg20as0j84cp.gif" />
 
 ## How to use?
 
